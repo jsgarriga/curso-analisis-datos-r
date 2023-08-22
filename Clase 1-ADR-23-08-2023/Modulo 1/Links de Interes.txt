@@ -1,0 +1,10 @@
+DATA WRANGLING
+https://gantabi.com/2019/06/12/que-es-el-data-wrangling-parte-i/
+
+QUE SON LOS IDE
+https://www.redhat.com/es/topics/middleware/what-is-ide
+https://www.ecured.cu/IDE_de_Programaci%C3%B3n#Caracter.C3.ADsticas
+
+QUE SON LOS SCRIPTS
+https://es.wikipedia.org/wiki/Script
+https://www.significados.com/script/
