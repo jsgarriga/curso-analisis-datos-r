@@ -19,7 +19,7 @@
 
 ### Prerrequisitos:
 
-- Leer el documento: [0_Instalación de R y RStudio.docx](https://github.com/jsgarriga/curso-analisis-datos-r/blob/main/otros_recursos/0_Instalaci%C3%B3n%20de%20R%20y%20RStudio.docx)
+- Leer el documento: [0_Instalación de R y RStudio.docx](https://github.com/jsgarriga/curso-analisis-datos-r/blob/main/otros_recursos/0_Instalaci%C3%B3n%20de%20R%20y%20RStudio/0_Instalaci%C3%B3n%20de%20R%20y%20RStudio.md)
 
 -----
 
