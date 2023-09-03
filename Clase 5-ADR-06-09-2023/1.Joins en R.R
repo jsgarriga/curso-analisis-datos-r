@@ -6,7 +6,7 @@
 
 Datos_1=data.frame(
   id=c(1:10),
-  Nombre=c("Juan", "Clara", "David", "María", "Pedro", "Claudia", "Martín", "Ignacio", "Jose", "Lucas" ))
+  Nombre=c("Juan", "Clara", "David", "Juana", "Pedro", "Claudia", "Andy", "Ignacio", "Jose", "Lucas" ))
 Datos_2=data.frame(  Edad=c(20, 32, 18, 26, 38, 52, 19, 31, 29, 60 ),
                      Peso=c(68, 42, 70, 47, 76, NA, 71, 83, 69, 92))
 
@@ -16,7 +16,7 @@ Dato12 <- cbind(Datos_1,Datos_2)
 
 Datos_1=data.frame(
   id=c(1:10),
-  Nombre=c("Juan", "Clara", "David", "María", "Pedro", "Claudia", "Martín", "Ignacio", "Jose", "Lucas" ))
+  Nombre=c("Juan", "Clara", "David", "Juana", "Pedro", "Claudia", "Andy", "Ignacio", "Jose", "Lucas" ))
 Datos_3=data.frame(
   Id=c(11,12,13),
   nombre=c("Ximena","Bruno","Silvina"))
@@ -25,7 +25,7 @@ rbind(Datos_1,Datos_3)
 
 Datos13 <- rbind(Datos_1,Datos_3)
 
-
+# Importamos todas las librerÃ­as del Tidyverse
 library(tidyverse)
 
 # JOINS O MERGE
@@ -33,7 +33,7 @@ library(tidyverse)
 #Definimos los data frame
 Datos_4=data.frame(
   Id=c(1:6),
-  Nombre=c("Juan", "Clara", "David", "María", "Pedro", "Claudia")
+  Nombre=c("Juan", "Clara", "David", "Mar?a", "Pedro", "Claudia")
 )
 Datos_5=data.frame(
   Id=c(1,2,5,6,8,9),

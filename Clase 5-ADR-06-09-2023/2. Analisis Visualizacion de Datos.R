@@ -1,13 +1,18 @@
-#############################
-#VISUALIZACION DE DATOS CON R
-#############################
+# AN√ÅLISIS DE DATOS CON R
 
-#Para hacer estos gr·ficos vamos a utilizar los datos que vienen en R llamados Iris. Primero visualizamos como esta compuesto este conjunto de datos
+# Importamos todas las librer√≠as del Tidyverse
+library(tidyverse)
+
+Ventas_Clientes <- Clie_Fact %>% 
+  group_by(`Nombre y Apellido`) %>% 
+  summarise(Total_Ventas = sum(Total)) 
+
+# VISUALIZACION DE DATOS CON R
+
+# Para hacer estos gr√°ficos vamos a utilizar los datos que vienen en R llamados Iris. Primero visualizamos como esta compuesto este conjunto de datos
 
 Datos<-iris
 head(Datos,10)
-
-library(tidyverse)
 
 ggplot(data=Datos, aes(Sepal.Length,Sepal.Width))+
   geom_point()
@@ -16,7 +21,7 @@ ggplot(data=Datos, aes(Sepal.Length,Sepal.Width))+
 ggplot(data=Datos)+
   geom_point(aes(x=Sepal.Length,y=Sepal.Width))
 
-#Aumentar el tamaÒo de los puntos
+#Aumentar el tama?o de los puntos
 
 ggplot(data=Datos)+
   geom_point(aes(x=Sepal.Length,y=Sepal.Width),size=3)
@@ -35,7 +40,7 @@ ggplot(data=Datos)+
   geom_point(aes(x=Sepal.Length,y=Sepal.Width,color=Species),
              alpha = 0.7, size=3)
 
-#Podemos usar una variable categÛrica para q haga un grafico para cada una de sus categorias
+#Podemos usar una variable categ?rica para q haga un grafico para cada una de sus categorias
 
 ggplot(data=Datos)+
   geom_point(aes(x=Sepal.Length,y=Sepal.Width, color=Species),
