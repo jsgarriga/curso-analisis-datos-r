@@ -23,68 +23,52 @@ Ventas_Clientes
 
 # VISUALIZACION DE DATOS CON R
 
+# Para más info, ver
+# https://ggplot2.tidyverse.org/
+# https://r-graph-gallery.com/ggplot2-package.html
+
+# Ejemplo de visualización
+
+# Keep 30 first rows in the mtcars natively available dataset
+data <- head(mtcars, 30)
+
+# 1/ add text with geom_text, use nudge to nudge the text
+ggplot(data, aes(x=wt, y=mpg)) +
+  geom_point() + # Show dots
+  geom_text(
+    label=rownames(data), 
+    nudge_x = 0.25, nudge_y = 0.25, 
+    check_overlap = T
+  )
+
 # Para hacer estos gráficos vamos a utilizar los datos que vienen en R llamados Iris. Primero visualizamos cómo esta compuesto este conjunto de datos:
 
 # Cargamos y exploramos los datos
 Datos <- iris
 head(Datos, 10)
 
-# Creamos un gráfico de dispersión entre el largo y ancho de los sépalos
-ggplot(data=Datos, aes(Sepal.Length,Sepal.Width))+
-  geom_point()
+# Creamos un gráfico de dispersión
+ggplot(Datos, aes(Sepal.Length, Sepal.Width)) +
+  geom_point(size = 3, color = "navy") 
+# Con size fijamos el tamaño de los puntos, con color el color je
 
-# Otra forma...
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width))
+# Visualizamos las distinas especies
+ggplot(Datos, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point(size = 2, alpha = 0.7) + 
+  facet_wrap(~Species) # Para ver en distintos cuadros las especies
 
-# Aumentar el tamaño de los puntos
-ggplot(data=Datos) +
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width),size=3)
+# Usamos "Shape" para cambiar la forma de los puntos
+ggplot(Datos, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point(size = 5, alpha = 0.7, shape = "+")
 
-
-# Cambiar el color para todos los puntos
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width),
-             size=3, color="#42c452")
-
-
-# Cambiar el color por especie de flor
-# Además, le damos un poco de transparencia a los puntos (este parámetro alpha varia entre 0 y 1)
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width,color=Species),
-             alpha = 0.7, size=3)
-
-# Podemos usar una variable categórica para que haga un gráfico para cada una de sus categorías, en nuestro caso, las especies
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width, color=Species),
-             alpha = .4, size=3, )+
-  facet_wrap(~Species)
+# Añadimos títulos y nombres para cada eje, entre otras etiquetas
+ggplot(Datos, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point(size = 3, alpha = 0.7) + 
+  labs(title = "Largo y ancho de los sépalos según el tipo de especie",
+       x = "Largo",
+       y = "Ancho",
+       color = "Especie")
+# NOTA: cada etiqueta en labs hace referencia a un parámetro previamente definido, por ejemplo, color en "ggplot" es "Species", por ello en labs se entiende que "color" sea nombrado como "Especie". Los mismo con x e y de "aes".
 
 
-# Con el parámetro "shape" cambiamos el tipo de forma para representar a las observaciones
 
-# Ejemplo 1
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width,color=Species),
-             alpha = .8, size=3, shape="@")
-
-# Ejemplo 2
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width,color=Species,shape=Species),
-             alpha = .8, size=3)
-
-# Ejemplo 3
-ggplot(data=Datos)+
-  geom_point(aes(x=Sepal.Length,y=Sepal.Width,color=Species),
-             alpha = .8, size=3, shape="*")
-
-# Cambiar títulos
-ggplot(data=Datos) +
-  geom_point(aes(x=Sepal.Length,
-                 y=Sepal.Width,
-                 color=Species),
-             alpha = .4, size=3) +
-  labs(title = "Largo y ancho de los sépalos según el tipo de especie", 
-       x="Largo", 
-       y="Ancho",
-       color="Especie")
