@@ -10,7 +10,7 @@ library(leaflet) # Leaflet nos permite hacer mapas interactivos
 # R maneja distintas formas de analizar los datos espaciales
 # Esto difiere según la librería con la que se trabaje
 
-# MAPAS CON LEAFLET
+# MAPAS (INTERACTIVOS) CON LEAFLET
 # MAPAS BASE
 
 leaflet() %>%  # leaflet trabaja con el operador %>% 

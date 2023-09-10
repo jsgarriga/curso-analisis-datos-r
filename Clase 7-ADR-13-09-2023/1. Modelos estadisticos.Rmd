@@ -1,0 +1,109 @@
+# Análisis de Datos Georreferenciados con R
+# Visualizando recorridos del SUBTE en CABA según las condiciones climáticas, 2018
+# Modelos estadísticos
+
+## Puesta a punto
+
+```{r}
+# Instalamos las librerías a utilizar (descomentar según corresponda)
+#install.packages("tidyverse")
+#install.packages("leaflet")
+
+# Cargamos las librerías a utilizar
+library(tidyverse, warn.conflicts = F)
+library(leaflet, warn.conflicts = F)
+```
+
+## Importar los datos
+
+Cargamos el csv sobre las precipitaciones en CABA en 2018:
+```{r}
+clima <- read_csv(file = './datos/precipitaciones-ba-2016-2019.csv')
+
+# Filtrar por fecha los datos que nos interesan "clima"
+clima2018 <- clima %>% 
+  filter(fecha >= "2018-01-01" & fecha <= "2018-12-31")
+
+# Veamos...
+clima2018
+```
+
+Importamos datos sobre los recorridos del SUBTE en CABA en 2018:
+```{r}
+subte2018_por_fecha <- read.csv(file = './datos/subte2018-cantidad-por-fecha.csv', sep=',', fileEncoding = 'utf-8')
+subte2018_por_fecha <- as.tibble(subte2018_por_fecha)
+
+# Veamos
+subte2018_por_fecha
+
+# Nota: los datos originales están a nivel molinete cada 15 minutos en data.buenosaires.gob.ar/dataset/subte-viajes-molinetes, esta es una consulta de los viajes por fecha sobre el mismo.
+```
+
+## Exploración y manipulación de los datos
+
+Vemos las columnas de "subte2018_por_fecha":
+```{r}
+colnames(subte2018_por_fecha)
+```
+
+Removemos los valores *NA* de Subte 2018 en "subte2018_por_fecha":
+```{r}
+subte_cantidad_por_fecha <- na.omit(object = subte2018_por_fecha)
+``` 
+
+Transformamos a formato fecha la columna fecha de "subte_cantidad_por_fecha":
+```{r}
+subte_cantidad_por_fecha$fecha <- as.Date(subte_cantidad_por_fecha$fecha)
+```
+
+## Análisis de datos
+
+Unimos la variable de "clima 2018" con los viajes en SUBTE por fecha:
+```{r}
+clima2018 <- left_join(x = clima2018, y = subte_cantidad_por_fecha)
+```
+
+Realizamos la correlación con la función **cor()** donde en primera instancia le aclaramos el eje x (la variable "fecha") y el eje y ("value"). Vemos que hay poca correlación:
+```{r}
+cor(y = clima2018$value, x = clima2018$cantidad_fecha)
+```
+
+Si nos quedamos con las fechas con mayores precipitaciones, vemos que hay una diferencia entre las medias:
+```{r}
+# Valor mayor a 50
+clima2018 %>% 
+  filter(value>50) %>% 
+  summarise(media=mean(cantidad_fecha))
+
+# Valor menor a 50
+clima2018 %>% 
+  filter(value<50) %>% 
+  summarise(media=mean(cantidad_fecha))
+```
+
+Creamos un objeto nuevo que distinga entre días de altas precipitaciones (columna "value") y el resto de los días:
+
+```{r}
+clima2018 <- clima2018 %>% 
+                mutate(alta_precipitacion = case_when(value > 50 ~ "si",
+                                                    value < 50 ~ "no"))
+clima2018
+```
+
+Vemos distribuciones con **geom_density()** según la cantidad de precipitaciones por fecha. Para esto en el eje x va a estar la columna "cantidad_fecha" y en el campo fill la columna "alta_precipitacion".
+
+Al parecer y como vamos a descubrir, hay una diferencia, que cuando llueve hay menos viajes en SUBTE:
+```{r}
+ggplot(clima2018, aes(x = cantidad_fecha, fill = alta_precipitacion)) +
+  geom_density(alpha = 0.5)
+```
+
+Mismo gráfico pero en forma de "violin" con la función **geom_violin**. Donde en el eje x va a estar la columna "alta_precipitacion" y en el eje y la "cantidad_fecha":
+```{r}
+ggplot(clima2018, aes(x = alta_precipitacion, y =  cantidad_fecha, fill=alta_precipitacion)) +
+  geom_violin(
+    trim = FALSE,
+    draw_quantiles = c(0.25, 0.5, 0.75), 
+    alpha = 0.5
+  )
+```
