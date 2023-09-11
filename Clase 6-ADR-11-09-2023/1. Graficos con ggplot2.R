@@ -46,7 +46,73 @@ a + geom_ribbon(aes(ymin = unemploy - 1900,
 a + geom_ribbon(aes(ymin = unemploy - 1900,
                     ymax = unemploy + 1900)) + theme_dark()
 
-# CLASE 6
+
+# CLASE 6 (11/9/2023)
+
+# Paso a paso de cómo crear un gráfico de barras
+
+# Importamos los datos
+iris 
+Datos <- as.tibble(iris)
+Datos
+
+# Creamos las estéticas para la geometría de barras
+ggplot(Datos) +
+  geom_bar(aes(x = Species))
+
+# Añadimos detalles visuales
+ggplot(Datos) + # Cargamos los datos
+  geom_bar(aes(x = Species), # Definimos la geometría y variables
+           alpha = .4, # Fijamos la transparencia
+           color = "navy", # Color de contorno
+           fill = "green") + # Color de relleno
+  labs(title = "Recuento según especies", # Aplicamos etiquetas
+       x = "Especies",
+       y = "Cantidad")
+
+# Revisamos un error
+ggplot(Datos) +
+  geom_bar(aes(x=Species),
+           alpha = .4,
+           color = "navy",
+           fill= "green")
+
+# Probamos con otro conjunto de datos
+# Detalles
+# Ordenar por frecuencia
+# Cantidad por barra
+
+# Importamos los datos
+Autos <- mpg
+
+# Barras apiladas
+ggplot(Autos) +
+  geom_bar(aes(x = fl, fill = class)) + 
+  labs(title = "Tipo de combustible por clase de vehículo",
+       x =  "Tipo de combustible",
+       y = "Cantidad",
+       fill = "Clase de vehículo")
+
+# Vista por facetas
+ggplot(Autos) +
+  geom_bar(aes(x = fl)) + 
+  facet_wrap(~class) + # Vemos por facetas el tipo de clase
+  labs(title = "Tipo de combustible por clase de vehículo",
+       x = "Tipo de combustible",
+       y = "Cantidad")
+
+# Visualización por histogramas
+ggplot(Autos) + # Definimos los datos del gráfico
+  geom_histogram(aes(x = cty), # Definimos el histograma
+                 binwidth = 5, # Ancho de la barra
+                 color = "red",
+                 fill = "orange") + 
+  labs(title = "Histograma de millas por galón en ciudad",
+       x = "Millas por galón",
+       y = "Frecuencia")
+
+
+# EXTRAS: MÁS VISUALIZACIONES!!!
 # GRAFICO DE BARRAS CON GGPLOTT2
 
 # Para armar el gr?fico de barras de Iris, vamos a recurrir a agrupar por Specie y a calcular la suma de la variable Sepal Length
@@ -59,13 +125,10 @@ Datos_agrupados <- Datos%>%
 
 # Una vez obtenidos los datos los podemos graficar
 
-
 ggplot(data=Datos_agrupados)+
   geom_bar(aes(x=Species,weight=Suma_SepalLength))
 
-
 # Igual que antes le podemos dar color
-
 
 ggplot(data=Datos_agrupados)+
   geom_bar(aes(x=Species,weight=Suma_SepalLength),
