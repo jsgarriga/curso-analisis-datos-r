@@ -17,6 +17,8 @@ library(tidyverse)
 # Vamos a trabajar con el conjunto de datos "gapminder"
 mundo <- read_csv("./datos/gapminder.csv")
 
+# Como motivación para entender el poder de muchos modelos simples, vamos a mirar los datos de “gapminder”. Estos datos fueron popularizados por Hans Rosling, un doctor y estadístico sueco. Los datos de gapminder resumen la progresión de países a través del tiempo, mirando estadísticos como esperanza de vida y PIB
+
 # Veamos...
 colnames(mundo) # PBI per cápita en dólares
 # [1] "pais"       "continente" "anio"       "expVida"   
