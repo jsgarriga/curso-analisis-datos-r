@@ -27,6 +27,9 @@ ggplot(argentina) +
 
 # Tiempo y expectativa de vida están correlacionadas en forma positiva: el incremento de una unidad de tiempo resulta en el incremento de la expectativa de vida
 
+# Veamos... vamos a crear un modelo lineal que nos permita observar por medio de la programación (no por intución visual humana) esta tendencia en el incremento de la esperanza de vida con el paso del tiempo
+modelo_exp <- lm(expVida ~ anio, data = argentina)
+
 # Veamos...
 modelo_exp
 
@@ -43,6 +46,8 @@ ggplot(argentina) +
 
 # Para el año 2030 la expectativa de vida en la Argentina habrá superado los 80 años
 
+# PONGAMOS A PRUEBA EL MODELO LINEAL PARA EXPLICAR EL PASO DEL TIEMPO EN EL PBI PC EN DÓLARES
+
 # En la práctica es raro encontrar una correlación tan nítida entre variables. Veamos el comportamiento del paso del tiempo sobre el PBI PC 
 ggplot(argentina) + 
   geom_point(aes(x = anio, y = PBI_PC)) +
@@ -50,12 +55,14 @@ ggplot(argentina) +
        y = "PBI per cápita") +
   geom_smooth(aes(x = anio, y = PBI_PC), method = "lm")
 
+# Veamos los desvíos entre la predicción y los datos reales
 modelo_PBI <- lm(PBI_PC ~ anio, data = argentina)
 
 # Revisión de los desvíos: sobre los residuos
-
+# Veamos los residuos
 residuos <- residuals(modelo_PBI)
 
+# Añadimos los residuos al conjunto de datos
 argentina <- argentina %>% 
   mutate(residuo_ml = residuos) # agregamos una columna
 
@@ -64,6 +71,7 @@ ggplot(argentina) +
   geom_hline(yintercept = 0, col = "blue") + # línea horizontal
   labs(x = "Año", y = "Residuo del modelo lineal")
 
+# Qué pasó en la cáida del PBI posterior al 2000?
 ggplot(argentina) + 
   geom_line(aes(x = anio, y = PBI_PC)) +
   geom_vline(aes(xintercept = 2001), color = "red") + # año de la crisis
