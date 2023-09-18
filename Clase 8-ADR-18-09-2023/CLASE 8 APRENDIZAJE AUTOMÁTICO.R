@@ -1,34 +1,5 @@
 # CLASE 8: APRENDIZAJE AUTOMÁTICO
 
-# ALGO DE TEORÍA
-
-# Un pequeño repaso al concepto de modelado...
-
-# En términos matemáticos, se habla de “modelar” debido a que estamos creando un modelo, una reconstrucción simplificada de cómo funciona un proceso observado en el mundo real. En un modelo de datos, siempre tenemos al menos:
-
-# - Una variable resultante, siempre una sola, también llamada variable “dependiente”,
-# - Una o más variables predictoras, también llamadas “explicativas”
-
-# El objetivo de un modelo es proveer un resumen simple y de baja dimensionalidad (las variables mínimas necesarias) sobre un conjunto de datos. El modelo capturará “señales” verdaderas (patrones generados por el fenómeno de interés) e ignorará el “ruido” (es decir, variaciones aleatorias que no nos interesan). Se trata no de descubrir "la verdad", sino de obtener una aproximación simple que sea útil
-
-# Tomaremos ventaja de que un modelo particiona los datos en patrones y residuos. Encontraremos patrones con visualizaciones, luego los haremos concretos y precisos con un modelo
-
-# Hay dos partes en un modelo: 1ro, definir una familia de modelos que exprese el patrón a capturar. Por ejemplo, el patrón podría ser una línea recta. 2do, generar un modelo ajustado al encontrar un modelo de la familia que sea lo más cercano a tus datos. Esto toma la familia de modelos genérica y la vuelve específica, con una ecuación y una fórmula
-
-# Ya trabajamos con modelos lineales en la clase anterior. Ahora, existe un amplio conjunto de familias de modelos que extienden la familia de modelos lineales de varias formas interesantes. Solo por nombrar algunos contamos con:
-
-# - Modelos lineales generalizados: extienden los modelos lineales para incluir respuestas no continuas (datos binarios o conteos)
-# - Modelos generalizados aditivos: extienden los modelos lineales generalizados para incorporar funciones suaves arbitrarias. Una fórmula simple se transforma en una ecuación y posteriormente estima una función
-# - Modelos lineales penalizados: penalizan modelos complejos (definidos por la distancia entre el vector de parámetros y el origen). Generaliza mejor respecto de nuevos conjuntos de datos para la misma población
-# - Modelos lineales robustos: modifican la distancia para restar importancia a los puntos que quedan muy alejados, los valores atípicos, con el inconveniente de que no son muy buenos cuando no existen
-# - Árboles: ajustan un modelo constante por partes, dividiendo los datos en partes progresivamente más y más pequeñas. No son efectivos por sí solos, pero son poderosos cuando se usan en modelos agregados como bosques aleatorios o máquinas aceleradoras de gradiente
-
-# Una vez que hayas manejado los modelos lineales, te resultará sencillo entender la mecánica de otras clases de modelos. Ser une modeladore hábil consiste en tener buenos principios generales y una gran caja de herramientas técnicas
-
-# -----
-
-# VAMOS A LA PRÁCTICA
-
 # Prerrequisitos
 
 # Instalamos la librería "datos" para obtener conjuntos de datos
